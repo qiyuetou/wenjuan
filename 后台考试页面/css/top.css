@@ -1,0 +1,585 @@
+/*首页的样式*/
+
+*{
+	margin:0px;
+	padding: 0px;
+}
+a{
+	text-decoration: none;
+	color: #222;
+}
+img{
+	border:none;
+}
+li{
+	list-style: none;
+}
+.top{
+	width: 100%;
+	height: 60px;
+	/*border-top: 4px solid #67AD03;*/
+	border-top: 4px solid #2e7bc1;
+	border-bottom:1px solid #c3c3c3;
+	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15), 0 -1px 0 0 #FCFCFC inset;
+	background-color: #f3f3f3;
+}
+.top .center{
+	/*width:1000px;*/
+	max-width: 1400px;
+	min-width: 1200px;
+	height: 60px;
+	margin:0 auto;
+	/*background: red;*/
+}
+.top .center .left{
+	width: auto;
+	height: 60px;
+	overflow: hidden;
+	float: left;
+}
+.top .center .left a{
+	width: 320px;
+	height: 60px;
+	/*border:1px solid red;*/
+	display: block;
+}
+.top .center .left a img{
+	width: 320px;
+	height: 60px;
+	display: block;
+}
+.top .center .right{
+	width:auto;
+	height: 22px;
+	padding-top: 18px;
+	margin-top: 10px;
+	float: right;
+}
+.top .center .right .out{
+	font:400 14px/22px '微软雅黑';
+	color: #222;
+	padding-left: 10px;
+}
+.top .center .right .out:hover{
+	color: #2E7DC6;
+	text-decoration: underline;
+}
+.top .center .right .my{
+	font:400 14px/22px '微软雅黑';
+	color: #222;
+}
+
+
+/*开始中间的内容页面布局*/
+.content{
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	background: url(../img/bg_body.jpg) repeat;
+}
+.content .kuai{
+	width:100%;
+	max-width: 1400px;
+	min-width:800px;
+	/*改变了*/
+	height: auto;
+	padding:15px 0px 49px 0px;
+	margin:0 auto;
+	/*border:1px solid red;*/
+	overflow: hidden;
+}
+.content .kuai .c{
+	width: 100%;
+	*width: 99%;
+	height: auto;
+	min-height: 680px;
+	overflow: hidden;
+	border:1px solid #d3d3d3;
+	border-radius: 3px;
+	background: #fff;
+	box-shadow: #E3E3E3 0px 2px 2px 0px;
+	box-sizing: border-box;
+	 -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.content .kuai .c .l{
+	width: 20%;
+	*width:19.9%;
+	/*height: 100%;*/
+	float: left;
+	box-sizing: border-box;
+	 -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+	/*这里为了让这个不出现 没有显示完的*/
+	
+	overflow: hidden;
+	border-right: 1px solid #d3d3d3;
+	background: #f3f3f3;
+
+	/*这是用来实现这个左边的自适应的高度*/
+	 padding-bottom:9999px; 
+	 margin-bottom:-9999px;
+}
+
+
+
+.content .kuai .c .l ul{
+	/*width: 189px;*/
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+
+	/*bootstrap影响的样式 -20margi-left  还原*/
+	margin-left: 0px;
+}
+.content .kuai .c .l ul li{
+	/*width: 189px;*/
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	
+}
+.content .kuai .c .l ul li a{
+	/*width: 157px;*/
+	width: 100%;
+	height: 40px;
+	display: block;
+	padding:0px 16px;
+	color: #222;
+	cursor: pointer;
+	/*background: red;*/
+	border-bottom:1px solid #d1d1d1;
+	/*box-shadow:#FDFDFD 0px 1px 0px 0px inset;*/
+	font:400 14px/40px '微软雅黑';
+	/*margin-bottom:6px;*/
+}
+.content .kuai .c .l ul li a:hover{
+	text-decoration: none;
+}
+/*.content .kuai .c .l ul li a{
+	width: 100%;
+	height: 31px;
+	display: none;
+	float: left;
+	color: #222;
+	font:400 14px/31px '微软雅黑';
+	padding:0px 36px 0px 50px;
+}*/
+
+
+
+/*给这里的a标签添加一个   颜色 表示当前是哪个页面*/
+/*.content .kuai .c .l ul li a.addgreen{
+	background: #69AE5C;
+	background: #2e7bc1;
+	color: #fff;
+}*/
+
+.content .kuai .c .l ul li i{
+	width: 23px;
+	height: 23px;
+	display: block;
+	float: left;
+	margin-top: 11px;
+	margin-right: 10px;
+}
+.content .kuai .c .l ul li span{
+	display: block;
+	float: left;
+}
+
+/*.content .kuai .c .l ul li b.change1{
+	background: url(../img/base.png) no-repeat 0px -423px;
+}
+.content .kuai .c .l ul li b.change2{
+	background: url(../img/base.png) no-repeat 0px -449px;
+}*/
+/*栏目的正常的五个图标*/
+.content .kuai .c .l ul li i.imgone{
+	background: url(../img/base.png) no-repeat -58px -45px;
+}
+.content .kuai .c .l ul li i.imgtwo{
+	background: url(../img/base.png) no-repeat -58px -77px;
+}
+.content .kuai .c .l ul li i.imgthree{
+	background: url(../img/base.png) no-repeat -59px -116px;
+}
+.content .kuai .c .l ul li i.imgfour{
+	background: url(../img/base.png) no-repeat -58px -161px;
+}
+.content .kuai .c .l ul li i.imgfive{
+	background: url(../img/base.png) no-repeat -58px -200px;
+}
+.content .kuai .c .l ul li i.imgsex{
+	background: url(../img/base.png) no-repeat -58px -240px;
+}
+.content .kuai .c .l ul li i.imgseven{
+	background: url(../img/base.png) no-repeat -58px -280px;
+}
+/*鼠标点击 图标为白色的*/
+.content .kuai .c .l ul .onegreen i.imgone{
+	background: url(../img/base.png) no-repeat -59px -342px;
+}
+.content .kuai .c .l ul .onegreen i.imgtwo{
+	background: url(../img/base.png) no-repeat -59px -377px;
+}
+.content .kuai .c .l ul .onegreen i.imgthree{
+	background: url(../img/base.png) no-repeat -58px -417px;
+}
+.content .kuai .c .l ul .onegreen i.imgfour{
+	background: url(../img/base.png) no-repeat -58px -458px;
+}
+.content .kuai .c .l ul .onegreen i.imgfive{
+	background: url(../img/base.png) no-repeat -59px -500px;
+}
+.content .kuai .c .l ul .onegreen i.imgsex{
+	background: url(../img/base.png) no-repeat -58px -542px;
+}
+.content .kuai .c .l ul .onegreen i.imgseven{
+	background: url(../img/base.png) no-repeat -58px -580px;
+}
+
+/*开始鼠标点击出现的效果*/
+.content .kuai .c .l ul .twogreen i.imgone{
+	background: url(../img/base.png) no-repeat -59px -342px;
+}
+.content .kuai .c .l ul .twogreen i.imgtwo{
+	background: url(../img/base.png) no-repeat -59px -377px;
+}
+.content .kuai .c .l ul .twogreen i.imgthree{
+	background: url(../img/base.png) no-repeat -58px -417px;
+}
+.content .kuai .c .l ul .twogreen i.imgfour{
+	background: url(../img/base.png) no-repeat -58px -458px;
+}
+}
+.content .kuai .c .l ul .twogreen i.imgfive{
+	background: url(../img/base.png) no-repeat -59px -500px;
+}
+.content .kuai .c .l ul .twogreen i.imgsex{
+	background: url(../img/base.png) no-repeat -58px -542px;
+}
+.content .kuai .c .l ul .twogreen i.imgseven{
+	background: url(../img/base.png) no-repeat -58px -580px;
+}
+
+
+/*.content .kuai .c .l ul .twogreen i.imgone{
+	background: url(../img/base.png) no-repeat 0px -233px;
+}
+.content .kuai .c .l ul .twogreen i.imgtwo{
+	background: url(../img/base.png) no-repeat 0px -200px;
+}
+.content .kuai .c .l ul .twogreen i.imgthree{
+	background: url(../img/base.png) no-repeat 0px -298px;
+}
+.content .kuai .c .l ul .twogreen i.imgfour{
+	background: url(../img/base.png) no-repeat 0px -265px;
+}
+.content .kuai .c .l ul .twogreen i.imgfive{
+	background: url(../img/base.png) no-repeat 0px -330px;
+}*/
+
+
+/*鼠标移动的效果加一个class  为onegreen的   开始*/
+.content .kuai .c .l ul li.onegreen{
+	
+	/*background: #B5DAAF;*/
+	/*background: #2e7bc1;*/
+	background: #3a97dd;
+}
+.content .kuai .c .l ul li.onegreen a{
+	color: #fff;
+}
+/*鼠标移动的效果加一个class  为onegreen的    结束*/
+
+
+/*鼠标 点击这个理 加上的class   为twogreen的 开始*/
+.content .kuai .c .l ul li.twogreen{
+	/*background: #71B665;*/
+	background: #2e7bc1;
+
+}
+.content .kuai .c .l ul li.twogreen a{
+	color: #fff;
+}
+/*鼠标 点击这个理 加上的class   为twogreen的 结束*/
+
+
+
+/*开始右边的  第一个用户后台的管理*/
+.content .kuai .c .r{
+	width: 80%;
+	*width:79.9%;    /*表示ie的浏览器的百分比  包括有边框*/
+	height: auto;
+	float: left;
+	overflow: hidden;
+}
+
+/*这里是在线考试的 字体变色*/
+.content .kuai .c .r #bianse{
+	color: #222;
+}
+.content .kuai .c .r #bianse:hover{
+	color:#006dcc;
+	text-decoration: none;
+}
+
+
+.content .kuai .c .r .topbar{
+	/*width: 808px;*/
+	width: 100%;
+	height: 36px;
+	background: #EBEBEB;
+	border-bottom:1px solid #d3d3d3;
+	box-shadow:rgba(255,​ 255,​ 255,​ 0.5) 0px 1px 0px 0px inset;
+}
+.content .kuai .c .r .topbar ul{
+	height: 36px;
+	width: auto;
+}
+.content .kuai .c .r .topbar ul li{
+	position: relative;
+	float: left;
+	/*width: auto;*/
+	width: 70px;
+	/*overflow: hidden;*/
+	height: 36px;
+	z-index: 1;
+}
+.content .kuai .c .r .topbar ul li a{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	display: block;
+	float: left;
+	height: 36px;
+	/*padding:0px 20px;*/
+	width:70px;
+	font:400 14px/35px '微软雅黑';
+	color: #222; 
+	z-index: 3;
+	text-align: center;
+	/*border-left: 1px solid #d3d3d3;*/
+	border-right: 1px solid #d3d3d3;
+}
+
+/*表示当前的那一个是选中的 */
+.content .kuai .c .r .topbar ul li.xuan a{
+	background: #fff;
+	height: 35px;
+	width:70px;
+	text-align: center;
+	border-top: 2px solid #70B213;
+	border-left: none;
+	border-right: 1px solid #d3d3d3;
+}
+.content .kuai .c .r .topbar ul li.xuan a:hover{
+	text-decoration: none;
+	cursor: default;
+}
+
+.content .kuai .c .r .admin{
+	width: 99%;
+	height: auto;
+	margin:0 auto;
+	margin-top: 20px;
+	overflow: hidden;
+	/*border-radius: 5px;*/
+}
+
+
+/*开始通知消息中的消息的展示中的 分页*/
+.content .kuai .c .r .fenye{
+	width: 100%;
+	height: 64px;
+	float: right;
+	text-align: center;
+	margin-top: 20px;
+	text-align: left;
+}
+/*开始分页 thinkphp 中的样式改变*/
+.content .kuai .c .r .fenye .ys{
+	width: :80%;
+	height: 32px;
+	display: block;
+	float: left;
+	font:400 12px/32px '微软雅黑';
+	margin-left: 0px;
+	margin-left: 50px;
+	/*background: #f5f5f5;*/
+}
+.content .kuai .c .r .fenye .yl{
+	width: 20%;
+	height: 32px;
+	float: right;
+	display: block;
+	font:400 12px/32px '微软雅黑';
+}
+.content .kuai .c .r .fenye .ys a{
+	height: 30px;
+	display: block;
+	float: left;
+	margin:0px 2px;
+	padding: 0px 10px;
+	font:400 12px/30px '微软雅黑';
+	color: #2F96B4;
+}
+.content .kuai .c .r .fenye .ys span{
+	height: 30px;
+	display: block;
+	float: left;
+	padding: 0px 10px;
+	font:400 12px/30px '微软雅黑';
+	color: #fff;
+}
+
+
+
+/*培训的地方  开始有上传文件word文件  上传框的的样式定义*/
+.content .kuai .c .r .upload{
+	margin-top: 5px;
+	
+	margin-left: 190px;
+}
+
+/*开始编辑个人信息*/
+.content .kuai .c .r .editadmin{
+	width: 100%;
+	*width: 90%;
+	*margin-left:10%;
+	height: auto;
+	float: left;
+	/*background: red;*/
+	margin-top: 20px;
+	overflow: hidden;
+}
+.content .kuai .c .r .editadmin .form-group{
+	width: 100%;
+	*width: 90%;
+	*margin-left: 30px;
+
+}
+
+/*开始通知的发送处的布局*/
+.content .kuai .c .r .tong{
+	width: 100%;
+	*width: 90%;
+	*margin-left:10%;
+	height: auto;
+	float: left;
+	margin-top: 20px;
+	overflow: hidden;
+}
+.content .kuai .c .r .tong .baidu{
+	display: block; 
+}
+
+.content .kuai .c .r .tong .baidu .control-label{
+	display: block;
+	float: left; 
+}
+.content .kuai .c .r .tong .baidu .nei{
+	width: 700px;
+	height: 500px;
+	display: block;
+	float: left;
+	margin-left: 20px;
+}
+/*.content .kuai .c .r .tong .baidu #container{
+	height: 400px;
+}*/
+/*开始 用户增加 时的 部门 不可选的手势*/
+.disableInp:hover{
+	cursor: not-allowed;
+}
+.zuzhi{
+	display: block;
+	float: left;
+	height: 40px;
+	padding-left: 10px;
+	font:400 14px/27px '微软雅黑';
+	color: 	#0088CC;
+	cursor: pointer;
+}
+.zuzhi2{
+	display: block;
+	float: left;
+	height: 40px;
+	padding-left: 10px;
+	font:400 14px/27px '微软雅黑';
+	color: 	#0088CC;
+	cursor: pointer;
+}
+/*开始 底部的最下面 布局*/
+.bottom{
+	width: 100%;
+	height: 67px;
+	display: block;
+	clear: both;
+	background: #727171;
+}
+.bottom .foot{
+	width: 1000px;
+	height: 67px;
+	margin: 0 auto;
+
+	/*这里的center  是对下面的 ul居中的  ul已经是行级元素了*/
+	text-align:center;
+}
+.bottom ul{
+	/*width: 1000px;*/
+	/*这里不能写固定 宽度  改为自适应的宽度*/
+	width: auto;
+	display: inline-block;
+	height: 19px;
+	overflow: hidden;
+	padding:24px 0px;
+	/*margin: 0 auto;*/
+}
+.bottom ul li{
+	width: auto;
+	height: 19px;
+	overflow: hidden;
+	float: left;
+}
+.bottom ul li a{
+	height: 14px;
+	display: block;
+	padding:0px 12px;
+	font:400 12px/15px '微软雅黑';
+	border-right:1px solid #dadada;
+	color: #dadada;
+}
+.bottom ul li a:hover{
+	text-decoration: underline;
+}
+.bottom ul li p{
+	height: 14px;
+	padding-left: 12px;
+	font:400 12px/15px '微软雅黑';
+	color: #dadada;
+}
+
+
+
+
+/*定义一个 黑色的快 */
+.fixKuai{
+	height: 40px;
+	width: 160px;
+	background: #5e5e5e;
+	border-radius: 10px;
+	box-shadow:#999999 2px 5px 5px 0px;
+	position: fixed;
+	top: 300px;
+	left: 400px;
+	font:700 14px/40px '微软雅黑';
+	color: #fff;
+	opacity: 0;
+	filter:alpha(opacity=0);
+	text-align: center;
+	z-index: 999;
+}

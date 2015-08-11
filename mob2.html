@@ -1,0 +1,883 @@
+<html lang="zh-cn"><head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no minimal-ui">
+	<title>兜行</title>
+	<link rel="stylesheet" href="//cdn.bootcss.com/twitter-bootstrap/3.2.0/css/bootstrap.min.css">
+
+	<style type="text/css">
+	img{
+		max-width: 100%;
+	}
+	body{
+		font-size:14px;
+		font-family: Helvetica,Arial,Georgia,"Times New Roman","Microsoft YaHei","微软雅黑",STXihei, "华文细黑",serif;
+	}
+	textarea{
+		margin-top:10px;
+	}
+	.list-group{
+		margin-bottom:4px;
+	}
+	.input-group{
+		margin-top:10px;
+	}
+	.price-mark{
+		color:#D9534F;font-size: 18px;font-weight:500;
+	}
+	.offset-mark{
+		color:#333;font-size: 20px;font-weight:500;
+	}
+	.warn-card{
+		background-color:#F0AD4E;color:#ffffff;
+	}
+	.pend-card{
+		background-color:#777777;color:#ffffff;
+	}
+	div.footer{
+		position:fixed;bottom:0px;opacity:0.88;height:50px;line-height:50px;width:100%;margin-left: -4px;
+	}
+	div.score-info{
+		background-color: #f7f7f9;margin-top: 10px;
+	}
+	div.score-info-one{
+		background-color: #f7f7f9; padding-left: 10px;
+	}
+	div.container_body{
+		margin-left:4px;margin-right:4px;line-height: 40px;
+	}
+	div.img-wrapper{
+		line-height: 1px;
+	}
+	.ul-intro li{
+		line-height:30px;
+		overflow:hidden;white-space:nowrap;text-overflow:ellipsis;
+	}
+	.answer-box{
+		margin: 2px;
+		background-color: #f7f7f9;
+	}
+	.slider{
+		transition: background-color 0.6s ease;
+	}
+	button.radio-shape{
+		border-radius:50%;-webkit-border-radius:50%;-moz-border-radius:50%;
+		background-color:none;
+		background-clip: padding-box;
+		outline:0 none !important;
+		text-align: center;
+	}
+	</style>
+</head>
+
+<body>
+	<!-- 主体域 -->
+	<div id="div-counter" style="display:none;margin-top:10px;">
+		<p class="text-center">
+			<span class="glyphicon glyphicon-time"></span> &nbsp;
+			<span class="price-mark" id="p-counter-clock"></span>
+		</p>
+	</div>
+	
+	<div class="row container_body" id="maindiv-body" style="margin-bottom:70px;">
+		<div id="maindiv-intro" style="display: block;">
+			<p class="text-center" id="p-intro-subject" style="font-size:20px;margin-top:12px;"><strong>1232133</strong></p>
+			<ul class="list-group ul-intro" id="p-intro-infolist"><li class="list-group-item"><span>状态</span><span style="float:right;max-width:80%;">已过期</span></li><li class="list-group-item"><span>开始时间</span><span style="float:right;max-width:80%;">07-22 13:56</span></li><li class="list-group-item"><span>截止时间</span><span style="float:right;max-width:80%;">07-23 13:56</span></li><li class="list-group-item"><span>考试时长</span><span style="float:right;max-width:80%;">60分钟</span></li><li class="list-group-item"><span>总分</span><span style="float:right;max-width:80%;">1分</span></li><li class="list-group-item"><span>及格</span><span style="float:right;max-width:80%;">1分</span></li><li class="list-group-item"><span>题数</span><span style="float:right;max-width:80%;">1题</span></li></ul>
+			<div class="footer"><div class="col-xs-12">
+				<button id="btn-intro-start" type="button" class="btn btn-primary btn-lg btn-block" onclick="startExam();">查看答案</button>
+			</div></div>
+		</div>
+		
+		<div id="maindiv-nitem" style="display: none;">
+			<div class="col-xs-12" id="p-nitem-hint" style="background-color:#f7f7f9;padding-top:12px;line-height:28px;">
+				<p id="p-nitem-question" style="font-size:16px;"></p>
+			</div>
+			<div class="col-xs-12" id="p-nitem-answer">
+			</div>
+			<div class="col-xs-12"><div class="col-xs-12 score-info" id="p-nitem-score">
+			</div></div>
+			<div class="footer" id="p-nitem-nav" style="background-color:#428BCA;color:#ffffff;">
+				<div class="col-xs-4" align="center" onclick="prevExam();"><span class="glyphicon glyphicon-arrow-left"></span><span id="p-nitem-blt"></span></div>
+				<div class="col-xs-4 warn-card slider" align="center" id="p-nitem-bc" onclick="goCheck();"></div>
+				<div class="col-xs-4" align="center" onclick="nextExam();"><span id="p-nitem-brt"></span><span class="glyphicon glyphicon-arrow-right"></span></div>
+			</div>
+		</div>
+		
+		<div id="maindiv-check" style="display: none;">
+			<div class="jumbotron">
+				<p class="text-center" style="font-size:28px;"><strong>答题卡</strong></p>
+				<p class="text-center" id="p-check-ntodo" style="display:none;font-size:14px;">
+					未答&nbsp;<span style="font-size:16px;" class="label label-warning" id="p-check-ncnt"></span>&nbsp;题
+				</p>
+			</div>
+			<div class="col-xs-12" id="p-check-mainbody">
+			</div>
+			<div class="footer"><div class="col-xs-12">
+				<button id="btn-submit" type="button" class="btn btn-primary btn-lg btn-block" onclick="submitExam();">交 卷</button>
+			</div></div>
+		</div>
+		
+		<div id="maindiv-score" style="display: none;">
+			<div class="jumbotron">
+				<p class="text-center" id="p-score-title" style="font-size:28px;"></p>
+				<p class="text-center" id="p-score-ntodo" style="display:none;font-size:14px;">
+					待批阅&nbsp;<span style="font-size:16px;" class="label label-default" id="p-score-ntodo-cnt"></span>&nbsp;题
+				</p>
+				<p class="text-center" id="p-score-nrank" style="display:none;font-size:14px;">
+					第&nbsp;<span style="font-size:16px;color:#D9534F;" id="p-score-nrank-abs"></span>&nbsp;名, 
+					&nbsp;超过&nbsp;<span style="font-size:14px;color:#D9534F;" id="p-score-nrank-rel"></span>%&nbsp;学员
+				</p>
+			</div>
+			<div class="col-xs-12" id="p-score-mainbody">
+			</div>
+			<div class="footer"><div class="col-xs-12">
+				<button type="button" class="btn btn-primary btn-lg btn-block" onclick="reCheck(0);">查看答案</button>
+			</div></div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+	/*---------- 基础库函数 ----------*/
+	function xhrOps(mt, url, ds, cbp, cb)
+	{
+		var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function(){
+			if (xhr.readyState == 4){
+				if(cb != null) cb(xhr, cbp);
+			}
+		}
+		xhr.open(mt, url, true);
+		xhr.send(ds);
+	}
+	function textTrim(t) { return t.replace(/(^\s*)|(\s*$)/g, ""); }
+	function truncStr(s) { return truncStrLen(s,12); }
+	function truncStrLen(s,l) { return (s.length>l) ? s.substring(0,(l-1))+'...' : s; }
+	function jump(url) {window.location.href = url;}
+	function setDa(id,s) { document.getElementById(id).disabled = (s == 0) ? false : true;}
+	function getDa(id) { return document.getElementById(id).disabled; }
+	function setDp(id,s) { document.getElementById(id).style.display = (s == 0) ? 'none' : 'block';}
+	function getDp(id) { return document.getElementById(id).style.display; }
+	function setT(id,v) { document.getElementById(id).title = v; }
+	function getT(id) { return document.getElementById(id).title; }
+	function setH(id,v) { document.getElementById(id).innerHTML = v; }
+	function getH(id) { return document.getElementById(id).innerHTML; }
+	function setV(id,v) { document.getElementById(id).value = v; }
+	function getV(id) { return document.getElementById(id).value; }
+	function setCk(id,s) { document.getElementById(id).checked = (s == 0) ? false : true; }
+	function getCk(id) { return document.getElementById(id).checked == true ? 1 : 0; }
+	function setCn(id,v) { document.getElementById(id).className = v; }
+	function getCn(id) { return document.getElementById(id).className; }
+	function setC(id,c) { document.getElementById(id).style.color = c; }
+	function setBc(id,c) { document.getElementById(id).style.backgroundColor = c; }
+	function clicK(id) {if(!g_submit_on) document.getElementById(id).click();}
+	function toEnd() {scrollTo(0,document.body.scrollHeight);}
+	function chkNull(k,v){return ((k == null) || (k == '') || (k == undefined))?v:k;}
+	function calTs(ts)
+	{
+		var d = new Date(ts*1000);
+		var mm = d.getMonth() + 1;
+		if(mm < 10) mm = '0'+mm;
+		var dd = d.getDate();
+		if(dd < 10) dd = '0'+dd;
+		var hh = d.getHours();
+		if(hh < 10) hh = '0'+hh;
+		var ii = d.getMinutes();
+		if(ii < 10) ii = '0'+ii;
+		return mm+'-'+dd+' '+hh+':'+ii;
+	}
+	function genCtStr(t)
+	{
+		var m = parseInt(t/60);
+		var ms = m<10?'0'+m.toString():m.toString();
+		var s = t%60;
+		var ss = s<10?'0'+s.toString():s.toString();
+		return ms+':'+ss;
+	}
+	function chkValue(v)
+	{
+		if((v == undefined) || (v == 'null') || (v == '')) return '';
+		return v;
+	}
+	function addStrong(s)
+	{
+		return "<strong>"+s+"</strong>";
+	}
+	
+	/*---------- 切换面板 ----------*/
+	function reDraw(page)
+	{
+		g_page = page;
+		setBody(page);
+		scrollTo(0,0);
+	}
+	function setBody(page)
+	{
+		var divs = new Array('intro','nitem','check','score');
+		for(var i=0; i<divs.length; i++) setDp("maindiv-"+divs[i],0);
+		setDp("maindiv-"+page, 1);
+				
+		switch(page){
+		case 'intro':
+			showIntro();
+			break;
+		case 'nitem':
+			showNitem();
+			break;
+		case 'check':
+			showCheck();
+			break;
+		case 'score':
+			showScore();
+			break;
+		default:
+			break;
+		}
+	}
+
+	/*---------- 功能函数 ----------*/
+	function getXmlNv(xml,tag,n)
+	{
+		if(xml.getElementsByTagName(tag).length == 0) return 0;
+		return xml.getElementsByTagName(tag).item(n).firstChild.nodeValue;
+	}
+	function chkBeforeDate()
+	{
+		return g_curr_ts < parseInt(getXmlNv(g_xml,'startline',0)) ? 1 : 0;
+	}
+	function chkOutDate()
+	{
+		return g_curr_ts > parseInt(getXmlNv(g_xml,'deadline',0)) ? 1 : 0;
+	}
+	function chkAnswerOn()
+	{
+		var t = parseInt(getXmlNv(g_xml,'type',0));
+		if(t != 3){
+			if(g_submit_on) return 1;
+		}else{
+			if(chkOutDate()) return 1;
+		}
+		return 0;
+	}
+	function genChoiceStr(i,s)
+	{
+		// 把"2,3"转成"0,1,1,0"格式答案
+		if(getXmlNv(g_itms[i],'t',0) != 1) return s;
+		if(s == '') return s;
+
+		var mapn = new Array();
+		var as = g_itms[i].getElementsByTagName('a');
+		for(var j=0; j<as.length; j++) mapn.push(0);
+		var an = s.split(',');
+		for(var j=0; j<an.length; j++) mapn[parseInt(an[j]) - 1] = 1;
+		
+		var so = '';
+		for(var j=0; j<as.length; j++) so += mapn[j]+',';
+		return so.substring(0, so.length-1);
+	}
+	function genChoiceRsvStr(i,s)
+	{
+		// 把"0,1,1,0"转成"2,3"格式答案
+		if(getXmlNv(g_itms[i],'t',0) != 1) return s;
+		if(s == '') return s;
+
+		var an = s.split(',');
+		var as = '';
+		for(var j=0; j<an.length; j++){
+			if(an[j] == 1) as += (j+1)+',';
+		}
+		return as.substring(0, as.length-1);
+	}
+	function genStStr()
+	{
+		// order sensitive
+		if(g_beforedate_on) return '尚未开始';
+		if(g_outdate_on) return '查看答案';
+		if(g_redo)  return (g_eid=='anonymous') ? '重 考' : '补 考';
+		if(g_submit_on)  return '查看答案';
+		if(g_sec == 0)   return '开始考试';
+		return '继续考试';
+	}
+	function genExStr()
+	{
+		if(g_submit_on)  return g_score.done ? g_score.score+'分':'待批阅';
+		if(g_outdate_on) return '已过期';
+		if(g_sec == 0)   return '未考试';
+		return '考试中';
+	}
+	function genExDesc()
+	{
+		if(g_submit_on && g_score.done) return g_score.redo ? '得分(补考)' : '得分';
+		return '状态';
+	}
+	function genScoreTitle()
+	{
+		if(g_outdate_on && !g_submit_on) return '已过期';
+		if(!g_score.done) return '待批阅';
+		return g_score.score;
+	}
+	function genAnStr(n)
+	{
+		var ia = ['A','B','C','D','E','F','G','H','I','J'];
+		return ia[n%10];
+	}
+	function calScore()
+	{
+		var score = 0;
+		for(var i=0; i<g_itms.length; i++) score += parseInt(getXmlNv(g_itms[i],'s',0));
+		return score;
+	}
+	function genQtStr(i,t)
+	{
+		if(t==1){
+			var n = 0;
+			var a = i.getElementsByTagName('a');
+			for(var j=0; j<a.length; j++) n += parseInt(a[j].getAttribute('correct'));
+			return n == 1 ? '[单选题] ':'[多选题] ';
+		}
+		if(t==2) return '[填空题] ';
+		if(t==3) return '[问答题] ';
+		return '';
+	}
+	function renewCounter()
+	{
+		var ts = g_sec*1000 + g_sec_base - (new Date().getTime());
+		ts = ts < 0 ? 0 : parseInt(ts/1000);
+		setH("p-counter-clock", genCtStr(ts));
+		if(ts > 0){
+			setTimeout("renewCounter()", 1000);
+		}else{
+			if(g_submit_on == 0) submitExam();
+		}
+	}
+	function proDownImage(img) {
+		if((img.width > 0) && (img.height > 0)) {
+			var ww = (document.getElementById('div-counter').offsetWidth-40) / img.width;
+			var hh = 640 / img.height;　
+			var rate = (ww < hh) ? ww: hh;
+			if(rate > 1) rate = 1;
+			img.width = parseInt(img.width * rate);
+			img.height = parseInt(img.height * rate);
+
+			var canvas = document.getElementById(g_imgid+'-cvs');
+			canvas.width = img.width;
+			canvas.height = img.height;
+			var cxt = canvas.getContext("2d");
+			cxt.scale(rate,rate);
+			cxt.drawImage(img,0,0);
+			g_canvas_on = 1;
+		}
+		setDp(g_imgid+'-pgs',0);
+	}
+	function chgimg(e)
+	{
+		if(window.FileReader == undefined) return;
+		setDp(g_imgid+'-pgs',1);
+		var reader = new FileReader();
+		reader.onload = function(e){
+			var img = new Image();
+			img.onload = function() {
+				proDownImage(img);
+			}
+			img.src = e.target.result;
+		};
+		var val = document.getElementById(g_imgid).files[0];
+		reader.readAsDataURL(val);
+	}
+
+	/*---------- 生成富文本内容 ----------*/
+	function genOneSrStr(t,s,rf)
+	{
+		if(t == 1) return '本题得分:&nbsp;<span class="price-mark">'+s+'</span>分&nbsp;&nbsp;'+((rf=='')?'':'正确答案:&nbsp;<span class="label label-success">'+rf+'</span>');
+		if(t == 2) return '待批阅&nbsp;&nbsp;'+((rf=='')?'':'正确答案:&nbsp;<span class="label label-success">'+rf+'</span>');
+		if(t == 3) return '得分及答案在&nbsp;<span class="price-mark">'+rf+'</span>&nbsp;后可见';
+		return '';
+	}
+	function genLiItem(l,r,i)
+	{
+		var is = (i=='')?'':'id="'+i+'"';
+		var str = '<li class="list-group-item"><span>'+l+'</span>';
+		str += '<span style="float:right;max-width:80%;" '+is+'>'+r+'</span></li>';
+		return str;
+	}
+	function setChoiceBtn(i,j,stat)
+	{
+		if(stat == 'off'){
+			setCn('ip-itm'+i+'-an'+j,"btn btn-default radio-shape");
+			setV('ip-itm'+i+'-an'+j, 'off');
+			setC('ch-itm'+i+'-an'+j,'#333');
+		}else{
+			setCn('ip-itm'+i+'-an'+j,"btn btn-primary radio-shape");
+			setV('ip-itm'+i+'-an'+j, 'on');
+			setC('ch-itm'+i+'-an'+j,'#428BCA');
+		}
+	}
+	function genQaBox(i, prefix)
+	{
+		var did = prefix+i;
+		var s = '<div class="col-xs-2" style="padding:2px;">';
+		s += '<div align="center" class="answer-box" style="width:100%;" id="'+did+'" onclick="hintCheck('+i+');">';
+		s += (i+1)+'</div></div>';
+		return s;
+	}
+	function genAnswerZone(i, j)
+	{
+		var t = getXmlNv(g_itms[i],'t',0);
+		var as = g_itms[i].getElementsByTagName('a');
+		var aid = 'ip-itm'+i+'-an'+j;
+		var pid = 'ph-itm'+i+'-an'+j;
+		var did = 'ch-itm'+i+'-an'+j;
+		var tid = 'tip-itm'+i+'-an'+j;
+		var reg3 = /<br>/g;
+		
+		var s = '';
+		if(t == 1){
+			s = '<div id="'+did+'" style="line-height:24px;margin-top:12px;" onclick="chkPass('+j+');">';
+			s += '<button type="button" class="btn btn-default radio-shape" id="'+aid+'" style="width:32px;height:32px;">';
+			s += genAnStr(j)+'</button><div style="margin-left: 40px;margin-top: -28px;">';
+			s += '<span id="'+aid+'">'+textTrim(as[j].firstChild.nodeValue).replace(reg3,'')+'</span>&nbsp;';
+			s += '<span id="'+tid+'"></span></div></div>';
+		} else if(t == 2){
+			var c = parseInt(as[j].getAttribute('format'));
+			if(c == 1) {
+				s += '<div class="input-group"><span class="input-group-addon">'+(j+1)+'</span>';
+				s += '<input type="text" id="'+aid+'" class="form-control"></div>';
+				s += '<div class="score-info-one" id="'+tid+'"></div>';
+			}else{
+				g_imgid = pid;
+				var imgblk = g_submit_on?'<img id="'+pid+'-img">':'<canvas id="'+pid+'-cvs" height="0px;"></canvas>';
+				s += '<div class="input-group"><span class="input-group-addon">'+(j+1)+'</span>';
+				s += '<input type="text" id="'+aid+'" class="form-control">';
+				s += '<span class="input-group-addon glyphicon glyphicon-picture" style="top:0px;" onclick="clicK(\''+pid+'\');">拍照</span></div>';
+				s += '<div class="img-wrapper"><div id="'+pid+'-pgs" style="display:none"></div>'+imgblk+'</div>';
+				s += '<div style="position:absolute;top:-400px;">';
+				s += '<input type="file" id="'+pid+'" accept="image/*" capture="camera" onchange="chgimg(event);"></div>';
+				s +=  '<div class="score-info-one" id="'+tid+'"></div>';
+			}
+		} else{
+			s += '<textarea class="form-control" id="'+aid+'" rows="5"></textarea>';
+			if(parseInt(as[j].getAttribute('format')) != 1){
+				g_imgid = pid;
+				var imgblk = g_submit_on?'<img id="'+pid+'-img">':'<canvas id="'+pid+'-cvs" height="0px;"></canvas>';
+				s += '<button type="button" class="btn btn-default" onclick="clicK(\''+pid+'\');">';
+				s += '<span class="glyphicon glyphicon-picture"></span> 拍照</button><div class="img-wrapper">';
+				s += '<div id="'+pid+'-pgs" style="display:none"></div>'+imgblk+'</div>';
+				s += '<div style="position:absolute;top:-400px;"><input type="file" id="'+pid+'" accept="image/*" capture="camera" onchange="chgimg(event);"></div>';
+			}
+		}
+		return s;
+	}
+	function tipAnswerZone(i,j)
+	{
+		if(!g_submit_on) return;
+		if(!g_answer_on) return;
+		var t = getXmlNv(g_itms[i],'t',0);
+		var as = g_itms[i].getElementsByTagName('a');
+		var tid = 'tip-itm'+i+'-an'+j;
+		
+		if(t == 1) {
+			var c = parseInt(as[j].getAttribute('correct'));
+			if(c == 1) setH(tid,  '<span class="glyphicon glyphicon-ok-sign" style="color:#5CB85C"></span>');
+			setH("p-nitem-score", genOneSrStr(1, g_score.items[i].s,''));
+		}else if(t == 2){
+			var cl = g_score.items[i].c.toString();
+			var cl2 = cl.split(',');
+			var sl = g_score.items[i].s.toString();
+			var sl2 = sl.split(',');
+			var rf = (as[j].hasAttribute('correct'))?as[j].getAttribute('correct'):'';
+			setH(tid, (cl2[j] == 2 ? genOneSrStr(2,'',rf) : genOneSrStr(1,sl2[j],rf)));
+			setH("p-nitem-score", '');
+		}else{
+			var ct = g_score.items[i].c;
+			if(ct == 2) setH("p-nitem-score", genOneSrStr(2,'',''));
+			else setH("p-nitem-score", genOneSrStr(1, g_score.items[g_offset].s,''));
+		}
+	}
+
+	/*---------- 页间切换 ----------*/
+	function submitExam()
+	{
+		// 只有生成过答题卡 才禁止点击
+		if(g_card_on){
+			setH('btn-submit', '交卷中...');
+			setDa('btn-submit',1);
+		}
+
+		var p = {};
+		p.items = new Array();
+		p.consuming = 100;
+		p.xml = g_orginxml;
+		for(var i=0; i<g_length; i++){
+			var av = chkValue(g_answer[i]);
+			var ap = chkValue(g_photo[i]);
+			var ia = {};
+			ia.a = genChoiceRsvStr(i, av);
+			if(ap != '') ia.pic = ap;
+			p.items.push(ia);
+		}
+
+		var url = "/badou/submit_v2?sys=web&ver=1.0.2&rid="+g_rid+"&uid="+g_uid+"&redo="+g_redo;
+		xhrOps('POST', url, JSON.stringify(p), '', function(xhr, para){
+			var res = eval("("+xhr.responseText+")");
+			if(res.errcode != 0) {
+				alert('网络开小差了，请稍后重试');
+				reDraw('intro');
+				return;
+			}
+
+			setDp("div-counter",0);
+			g_submit_on = 1;
+			g_answer_on = chkAnswerOn();
+			g_score = res.data;
+			reDraw('score');
+		});
+	}
+	function startExam()
+	{
+		// 未考试 启动倒计时
+		if(!g_submit_on && !g_outdate_on){
+			setDp("div-counter",1);
+			if(g_sec == 0) {
+				g_sec_base = new Date().getTime();
+				g_sec = parseInt(getXmlNv(g_xml,'maxtime',0))*60;
+				setTimeout("renewCounter()", 100);
+			}
+		}
+		g_offset = 0;
+		reDraw('nitem');
+	}
+	function prevExam()
+	{
+		saveAn();
+		if(g_offset > 0){
+			g_offset -= 1;
+			reDraw('nitem');
+		}else{
+			reDraw('intro');
+		}
+	}
+	function nextExam()
+	{
+		saveAn();
+		if(g_offset < (g_length-1)){
+			g_offset += 1;
+			reDraw('nitem');
+		}else{
+			goCheck();
+		}
+	}
+	function hintCheck(i)
+	{
+		var id = (g_page == 'score') ? 'p-score-box-'+i : 'p-check-box-'+i;
+		setBc(id, '#428BCA');
+		setTimeout(function(){reCheck(i);}, 200);
+	}
+	function goCheck()
+	{
+		if(g_outdate_on) g_card_on = 1;
+		if(g_offset == (g_length-1)) g_card_on = 1;
+		if(g_submit_on || g_outdate_on){
+			reDraw('score');
+			return;
+		}
+		if(g_card_on){
+			saveAn();
+			reDraw('check');
+			return;
+		}
+	}
+	function reCheck(n)
+	{
+		g_offset = n;
+		reDraw('nitem');
+	}
+	function loadAn()
+	{
+		var av = chkValue(g_answer[g_offset]);
+		if(av == '') return;
+
+		var an = av.split(',');
+		var t = getXmlNv(g_itms[g_offset],'t',0);
+		for(var j=0; j<an.length; j++){
+			if(t == 1){
+				if(an[j] == 1) setChoiceBtn(g_offset, j, 'on');
+			}else {
+				setV('ip-itm'+g_offset+'-an'+j,an[j].replace('`', ','));
+			}
+		}
+	}
+	function loadPn()
+	{
+		var av = chkValue(g_photo[g_offset]);
+		if(av == '') return;
+		if(g_submit_on){
+			document.getElementById(g_imgid+'-img').src = av;
+		}else{
+			var img = new Image();
+			img.src = av;
+			img.onload = function(){
+				var canvas = document.getElementById(g_imgid+'-cvs');
+				canvas.width = img.width;
+				canvas.height = img.height;
+				var cxt = canvas.getContext("2d");
+				cxt.drawImage(img,0,0);
+				g_canvas_on = 1;
+			}
+		}
+	}
+	function saveAn()
+	{
+		if(g_submit_on) return;
+		if(g_outdate_on) return;
+		
+		// 保存文本答案
+		var t = getXmlNv(g_itms[g_offset],'t',0);
+		var as = g_itms[g_offset].getElementsByTagName('a');
+		var av = '';
+		for(var j=0; j<as.length; j++){
+			if(t == 1){
+				var onflg = getV('ip-itm'+g_offset+'-an'+j);
+				av += (onflg=='on'?1:0)+',';
+			}else {
+				// 转义','以防止答案中含有','
+				av += getV('ip-itm'+g_offset+'-an'+j).replace(',', '`') +',';
+			}
+		}
+		g_answer[g_offset] = (av == '')?'':av.substring(0, av.length-1);
+		
+		// 保存图片答案
+		if(g_canvas_on){
+			var canvas = document.getElementById(g_imgid+'-cvs');
+			g_photo[g_offset] = canvas.toDataURL('image/jpeg',0.8);
+			g_canvas_on = 0;
+		}
+	}
+	function chkPass(idx)
+	{
+		if(g_submit_on) return;
+		if(g_outdate_on) return;
+		var onflg = getV('ip-itm'+g_offset+'-an'+idx);
+		if(onflg != 'on') setChoiceBtn(g_offset, idx, 'on');
+		else setChoiceBtn(g_offset, idx, 'off');
+		
+		// 单选题的话，要把别的选项清除
+		var t = getXmlNv(g_itms[g_offset],'t',0);
+		if(genQtStr(g_itms[g_offset],t) != '[单选题] ') return;
+		var as = g_itms[g_offset].getElementsByTagName('a');
+		for(var j=0; j<as.length; j++){
+			if(j != idx) setChoiceBtn(g_offset, j, 'off');
+		}
+	}
+	function updScoreInfo(np)
+	{
+		if(np > 0){
+			setDp('p-score-ntodo', 1);
+			setH('p-score-ntodo-cnt', np);
+		}else{
+			if(g_submit_on && g_score.done){
+				var url = "/badou/rankexam?sys=web&ver=1.0.2&rid="+g_rid+"&uid="+g_uid+"&score="+g_score.score;
+				xhrOps('GET', url, '', '', function(xhr, para){
+					var res = eval("("+xhr.responseText+")");
+					if(res.errcode != 0) return;
+					setDp('p-score-nrank', 1);
+					setH('p-score-nrank-abs', addStrong(parseInt(res.data.abs)));
+					setH('p-score-nrank-rel', parseInt(res.data.rel));
+				});
+			}
+		}
+	}
+	
+	/*---------- 单页函数 ----------*/
+	function showIntro()
+	{
+		setH("p-intro-subject", addStrong(getXmlNv(g_xml,'subject',0)));
+		var s = genLiItem(genExDesc(), genExStr(),'');
+		s += genLiItem('开始时间',calTs(parseInt(getXmlNv(g_xml,'startline',0))),'');
+		s += genLiItem('截止时间',calTs(parseInt(getXmlNv(g_xml,'deadline',0))),'');
+		s += genLiItem('考试时长',getXmlNv(g_xml,'maxtime',0)+'分钟','');
+		s += genLiItem('总分',calScore()+'分','');
+		s += genLiItem('及格',g_pass_score+'分','');
+		s += genLiItem('题数',g_itms.length+'题','');
+		setH("p-intro-infolist", s);
+		setH("btn-intro-start", genStStr());
+		
+		// 对于可以补考的情景，要重置各个状态
+		if(g_redo && !g_outdate_on) {
+			g_submit_on = 0;
+			g_answer_on = 0;
+			g_card_on = 0;
+		}
+		// 未开始的考试不可点击
+		if(g_beforedate_on) setDa('btn-intro-start',1);
+	}
+	function showScore()
+	{
+		setH('p-score-title', addStrong(genScoreTitle())+'<span style="font-size:16px;">&nbsp;/ &nbsp;'+calScore()+'分</span>');
+		
+		// 生成表格区域
+		var str_mb = '';
+		for(var i=0; i<g_length; i++) str_mb += genQaBox(i, 'p-score-box-');
+		setH('p-score-mainbody', str_mb);
+		
+		// 设置格子状态
+		if(!g_submit_on) return;
+		var np = 0;  // 待批阅试题数
+		for(var i=0; i<g_score.items.length; i++){
+			var ac = g_score.items[i].c.toString();
+			var an = ac.split(',');
+			var bp = 0;	// 是否待批阅
+			var bc = 1;	// 是否正确
+			for(var j=0; j<an.length; j++){
+				if(an[j] == 2) bp = 1;
+				if(an[j] == 0) bc = 0;
+			}
+	
+			if(bp == 1){
+				np += 1;
+				setBc('p-score-box-'+i, '#777777');
+				setC('p-score-box-'+i, '#ffffff');
+			}
+
+			if(g_answer_on && !bp){
+				var hc = bc ? '#5CB85C' : '#D9534F';
+				var ht = bc ? '&radic;' : '&Chi;';
+				var hstr = '<span style="font-size:12px;position:absolute;top:-6px;right:6px;color:'+hc+';">'+ht+'</span>';
+				setH('p-score-box-'+i, (i+1)+hstr);
+			}
+		}
+
+		// 更新提示区域
+		updScoreInfo(np);
+	}
+	function showCheck()
+	{
+		// 生成表格区域
+		var str_mb = '';
+		for(var i=0; i<g_length; i++) str_mb += genQaBox(i, 'p-check-box-');
+		setH('p-check-mainbody', str_mb);
+		setDp('p-check-ntodo',0);
+			
+		// 设置格子状态
+		var ne = 0;	// 总共有几道题未答
+		for(var i=0; i<g_itms.length; i++){
+			var av = chkValue(g_answer[i]);
+			var ap = chkValue(g_photo[i]);
+			var an = av.split(',');
+			var be = 0;	// 本题是否已答
+
+			var t = getXmlNv(g_itms[i],'t',0);
+			if(t == 1){
+				for(j=0;j<an.length;j++){
+					if(an[j] == 1) be = 1;
+				}
+			}else if(t == 2){
+				for(j=0;j<an.length;j++){
+					if(an[j] != '') be += 1;
+				}
+				if(ap != '') be += 1;
+				if(be < an.length) be = 0;
+			}else{
+				if((an[0]!='') || (ap!='')) be = 1;
+			}
+
+			if(be == 0){
+				ne += 1;
+				setBc('p-check-box-'+i, '#F0AD4E');
+				setC('p-check-box-'+i, '#ffffff');
+			}
+		}
+
+		if(ne > 0){
+			setH('p-check-ncnt', ne);
+			setDp('p-check-ntodo',1);
+		}
+	}
+	function showNitem()
+	{
+		var i = g_xml.getElementsByTagName('item');
+		var t = getXmlNv(i[g_offset],'t',0);
+		var q = getXmlNv(i[g_offset],'q',0);
+		var reg1 = /<blank><\/blank>/g;
+		q = q.replace(reg1,'<span>__________</span>');
+		var reg2 = /\n/g;
+		q = q.replace(reg2,'<br/>');
+
+		// 生成题目区
+		setH("p-nitem-question", genQtStr(i[g_offset],t)+q);
+		setBc("p-nitem-bc", "#EC971F");
+		// 生成答题区
+		var s = '';
+		var as = i[g_offset].getElementsByTagName('a');
+		for(var j=0;j<as.length;j++) s += genAnswerZone(g_offset, j);
+		setH("p-nitem-answer", s);
+		// 提示正确答案
+		for(var j=0;j<as.length;j++) s += tipAnswerZone(g_offset, j);
+		if(g_submit_on && !g_answer_on) setH("p-nitem-score", genOneSrStr(3, '',calTs(parseInt(getXmlNv(g_xml,'deadline',0)))));
+
+		// 底部导航条
+		setH('p-nitem-blt', (g_offset > 0) ? '上一题' : '说明页');
+		setH('p-nitem-brt', (g_offset < (g_length-1)) ? '下一题' : '答题卡');
+		setH('p-nitem-bc', '<span class="offset-mark">'+(g_offset+1)+'</span>/'+g_length);
+
+		// 加载答案
+		setTimeout(function(){setBc("p-nitem-bc", "#F0AD4E");}, 600);
+		loadAn();
+		loadPn();
+	}
+
+	// 用于识别是否匿名用户（匿名可重考）
+	var g_eid = "10086";
+	var g_uid = "9ca8f8759174caaeb9250caacf667c9b";
+	var g_rid = "44a28b75afba4e45e3b7549bf2b60f56";
+	var g_imgid = '';
+	var g_page = 'intro';
+	var g_offset = 0;
+	var g_sec = 0;
+	var g_sec_base = 0;
+	var g_canvas_on = 0;	// 标记是否存图
+	var g_card_on = 0;	// 标记是否显示答题卡
+
+	// [NOTE] order sensitive!
+	// 初始化DOM
+	var g_domParser = new DOMParser();
+	var g_orginxml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><exam><subject><![CDATA[1232133]]></subject><department>XX公司总部</department><type>1</type><maxtime>60</maxtime><startline>1437544560</startline><deadline>1437630960</deadline><items><item><s>1</s><q><![CDATA[<img src=\"http://ops.mworking.cn/Uploads/picture/20150722/1437544635666378.png\">选择题题干选择题题干选择题题干选择题题干选择题题干选择题题干选择题题干选择题题干选择题题干选择题题干选择题题干			<img src=\"http://ops.mworking.cn/Uploads/picture/20150722/1437544652803315.png\"><br>测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试<img src=\"http://ops.mworking.cn/Uploads/picture/20150722/1437544718484431.png\">(1分)]]></q><t>1</t><pr>3</pr><a correct=\"0\"><![CDATA[选择一]]></a><a correct=\"1\"><![CDATA[选择二]]></a><a correct=\"0\"><![CDATA[选择三]]></a><a correct=\"0\"><![CDATA[选择四]]></a></item></items></exam>";
+	var g_xml = g_domParser.parseFromString(g_orginxml, 'text/xml');
+	var g_itms = g_xml.getElementsByTagName('item');
+	var g_length = g_itms.length;
+	
+	// 初始化用户状态
+	var g_curr_ts = "1438678942";	// 以服务器当前时钟为准
+	var g_submit_on = 0; // 是否已经交卷
+	var g_redo = 0; // 是否重考
+	var g_pass_score = 1; //及格线
+	var g_answer_on = chkAnswerOn();	// 是否允许显示答案
+	var g_outdate_on = chkOutDate();	// 是否已过期
+	var g_beforedate_on = chkBeforeDate(); // 是否未开始
+	
+	// 初始化答案字段
+	var g_score = null;
+	var g_answer = new Array();
+	var g_photo = new Array();
+	for(var j=0; j<g_length; j++) {
+		g_answer.push('null');
+		g_photo.push('null');
+	}
+	
+	// 对已交卷用户，填充答题信息
+	if(g_submit_on){
+		g_card_on = 1;
+		g_score = [];
+		var answer = [];
+		if(answer.length == g_length){
+			for(var j=0; j<g_length; j++){
+				if(chkValue(answer[j].a) != '') g_answer[j] = genChoiceStr(j,answer[j].a);
+				if(chkValue(answer[j].pic) != '') g_photo[j] = answer[j].pic;
+			}
+		}
+	}
+	
+	// 启动介绍页
+	reDraw(g_page);
+	</script>
+
+
+
+</body></html>

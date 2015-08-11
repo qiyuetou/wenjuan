@@ -1,0 +1,371 @@
+/*考试的的单独样式*/
+
+*{
+	margin:0px;
+	padding: 0px;
+}
+a{
+	text-decoration: none;
+	color: #222;
+}
+img{
+	border:none;
+}
+li{
+	list-style: none;
+}
+
+/*定义一个 黑色的快 */
+.fixKuai{
+	height: 40px;
+	width: 160px;
+	background: #5e5e5e;
+	border-radius: 10px;
+	box-shadow:#999999 2px 5px 5px 0px;
+	position: fixed;
+	top: 300px;
+	left: 400px;
+	font:700 14px/40px '微软雅黑';
+	color: #fff;
+	opacity: 0;
+	filter:alpha(opacity=0);
+	text-align: center;
+}
+
+.exam .attr{
+	width: 820px;
+	height: auto;
+	overflow: hidden;
+	background: #efefef;
+	display: block;
+	margin:0 auto;
+	margin-top: 30px;
+	padding-bottom:10px;
+	border:1px solid #dbdbdb;
+}
+.exam .attr .examinput{
+	width: 820px;
+	height: 30px;
+	display: block;
+	margin-top: 10px;
+}
+.exam .attr .examinput label{
+	width: 130px;
+	height: 30px;
+	display: block;
+	float: left;
+	text-align: right;
+	font:400 14px/30px Helvetica Neue;
+	color: #333;
+	padding-right: 10px;
+}
+.exam .attr .examinput .controls{
+	width: 150px;
+	height: 30px;
+	display:block;
+	float: left;
+	/*background: red;*/
+}
+/*对部门处的css 控制*/
+.disableInp:hover{
+	cursor: not-allowed;
+}
+.zuzhi{
+	display: block;
+	float: left;
+	height: 40px;
+	
+	font:400 14px/27px '微软雅黑';
+	color: 	#0088CC;
+	cursor: pointer;
+}
+/*开始试卷 里面的 东西*/
+.zuzhi2{
+	width:auto;
+	display: block;
+	height: 30px;
+	float: left;
+}
+.juan{
+	width: 820px;
+	height: auto;
+	/*overflow: hidden;*/
+	margin:0px auto;
+	margin-top: 30px;
+	background: #efefef;
+	border: 1px solid #dbdbdb;
+	padding-bottom: 10px;
+	clear: both;
+	/*height: 500px;*/
+	
+}
+.juan .ti{
+	width: 800px;
+	height: auto;
+	overflow: hidden;
+	margin-left: 10px;
+	/*position: relative;*/
+}
+.juan .biaoti{
+	width: 798px;
+	min-height: 30px;
+	height: auto;
+	/*background: #fafafa;*/
+	/*border: 1px solid #fafafa;*/
+	text-align: center;
+}
+.juan .biaoti p{
+	width: 798px;
+	min-height: 35px;
+	height: auto;
+	font:400 18px/35px '微软雅黑';
+	color: #666;
+	background: #fafafa;
+	border: 1px solid #fafafa;
+}
+.juan .biaoti p:hover{
+	background: #FDF9CD;
+}
+
+
+
+.exam .myradio{
+	width: 800px;
+
+	height:auto !important;
+	height:160px; /*假定最低高度是200px*/
+	min-height:160px;
+
+	overflow: hidden;
+	background: #fff;
+	padding-left: 0px;
+	margin-left: 10px;
+	margin-top: 15px;
+	margin-bottom: 10px;
+	border: 1px solid #dbdbdb;
+}
+.exam .myradio .tihao{
+	width: 40px;
+	/*表示  解决这个左边题号的自适应高度   开始*/
+	padding-bottom:9999px;
+	margin-bottom:-9999px;
+	/*表示  解决这个左边题号的自适应高度   结束*/
+	padding-top: 10px;
+	padding-left: 10px;
+	font:400 16px/32px '微软雅黑';
+	color: #666;
+	float: left;
+	border-right: 1px solid #dbdbdb;
+}
+/*删除这个 题目*/
+.exam .myradio .del{
+	width: 16px;
+	height: 16px;
+	display: block;
+	float: left;
+	background: url('../img/exam.png') no-repeat -23px -183px;
+	margin-top: 5px;
+	padding:0px;
+	border:none;
+	cursor: pointer;
+}
+/*添加一个选项的布局*/
+.exam .myradio .con .addtab{
+	width: 15px;
+	height: 15px;
+	background: red;
+	display: block;
+	margin-left: 40px;
+	background: url(../img/exam.png) no-repeat -102px -243px;
+	cursor: pointer;
+}
+.exam .myradio .con{
+	width: 730px;
+	height:auto !important;
+	height:60px; /*假定最低高度是200px*/
+	min-height:60px;
+	margin-bottom: 20px;
+	float: left;
+	overflow:hidden;
+}
+.exam .myradio .con .danxuan{
+	width: 800px;
+	height: auto;
+	overflow: hidden;
+}
+.exam .myradio .con .danxuan .ti{
+	width: 600px;
+	min-height: 37px;
+	height: auto;
+	float: left;
+	font:400 16px/37px '微软雅黑';
+	color: #666;
+	border:1px solid #fff;
+}
+.exam .myradio .con .danxuan .ti:hover{
+	background: #FDF9CD;
+}
+.exam .myradio .con .danxuan .grade{
+	width: 70px;
+	height: 37px;
+	display: block;
+	/*padding-left: 20px;*/
+	/*background: red;*/
+	float: left;
+	font:400 14px/37px '微软雅黑';
+	color: #666;
+}
+.exam .myradio .con .danxuan .grade i{
+	width: 50px;
+	display: block;
+	float: left;
+	height: 37px;
+	font:400 14px/37px '微软雅黑';
+	color: #666;
+	text-align: center;
+	border:1px solid #fff;
+	overflow:hidden;
+	/*background: red;*/
+}
+.exam .myradio .con .danxuan .grade em{
+	width: 15px;
+	height: 37px;
+	float: left;
+	font:400 14px/37px '微软雅黑';
+	color: #666;
+
+	/*background: green;*/
+}
+.exam .myradio .con .danxuan .grade i:hover{
+	background: #FDF9CD; 
+}
+/*开始单选题的选项的布局*/
+.exam .myradio .con ul{
+	width: auto;
+	height: auto;
+	/*overflow: hidden;*/
+}
+.exam .myradio .con ul li{
+	width: 505px;
+	height: auto;
+}
+.exam .myradio .con ul li .radio{
+	width: 505px;
+	height: auto;
+	position: relative;
+}
+.exam .myradio .con ul li .radio input{
+	width: 13px;
+	height: 20px;
+	margin-left:-20px;
+	margin-top: 2px;
+	display: block;
+	float: left;
+}
+.exam .myradio .con ul li p{
+	width: 505px;
+	height: auto;
+	border:1px solid #fff;
+
+	font:400 14px/20px '微软雅黑';
+	color: #666;
+	
+}
+.exam .myradio .con ul li p:hover{
+	background: #FDF9CD;
+}
+
+/*开始上移 和下移  还有删除选项*/
+.exam .myradio .con ul li .gaibian{
+	width: 80px;
+	height: 18px;
+	border:1px solid #c1c1c1;
+	border-bottom: none;
+	padding:3px 0px;
+	position: absolute;
+	top: -26px;
+	right: 0px;
+	display: none;
+	z-index: 3;
+}
+
+
+/*向上的 按钮*/
+.exam .myradio .con ul li .gaibian a.one{
+	width: 24px;
+	height: 18px;
+	padding-left: 2px;
+	display: block;
+	float: left;
+	border-right: 1px solid #c1c1c1;
+	cursor: pointer;
+	
+}
+.exam .myradio .con ul li .gaibian a.one i{
+	width: 18px;
+	height: 18px;
+	display: block;
+	margin-left: 1px;
+	background: url(../img/exam.png) no-repeat -39px -222px;
+}
+
+/*开始向下的按钮*/
+.exam .myradio .con ul li .gaibian a.two{
+	width: 24px;
+	height: 18px;
+	padding-left: 2px;
+	display: block;
+	float: left;
+	border-right: 1px solid #c1c1c1;
+	cursor: pointer;
+}
+.exam .myradio .con ul li .gaibian a.two i{
+	width: 18px;
+	height: 18px;
+	display: block;
+	margin-left: 1px;
+	background: url(../img/exam.png) no-repeat -39px -241px;
+}
+
+/*开始删除的按钮*/
+.exam .myradio .con ul li .gaibian a.three{
+	width: 24px;
+	height: 18px;
+	padding-left: 2px;
+	display: block;
+	float: left;
+	cursor: pointer;
+}
+.exam .myradio .con ul li .gaibian a.three i{
+	width: 18px;
+	height: 18px;
+	display: block;
+	margin-left: 1px;
+	background: url(../img/exam.png) no-repeat -120px -240px;
+}
+
+/*发布考题*/
+.fabu{
+	width: 800px;
+	height: 50px;
+	margin-left: 10px;
+	margin-top: 20px;
+	border: 1px solid #dbdbdb;
+	background: #fff url(../img/fabu.jpg) no-repeat right 10px;
+}
+.fabu .left{
+	width: 34px;
+	height: 34px;
+	border-right: 1px solid #dbdbdb;
+	padding:8px;
+	float: left;
+}
+.fabu .right{
+	width: 730px;
+	height: 50px;
+}
+.fabu .right .addtest,.fabu .right .deltest,.fabu .right .savetest{
+	float: left;
+	margin-left: 50px;
+	margin-top: 8px;
+}

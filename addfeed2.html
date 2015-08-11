@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<title>添加调研</title>
+	<link rel="stylesheet" type="text/css" href="./tool-css/jquery-ui.min.css">
+	<script type="text/javascript" src="./tool-js/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="./tool-js/jquery-ui.min.js"></script>
+	<style type="text/css">
+	#left{
+		width: 300px;
+		height:800px;
+		background: #f3f3f3;
+		float: left;
+	}
+	#left li{
+		width: 260px;
+		height: 40px;
+		background: red;
+		list-style: none;
+		margin-bottom: 10px;
+		cursor: pointer;
+	}
+	#right{
+		width: 600px;
+		height: 800px;
+		margin-left: 50px;
+		background: #acacac;
+		float:left;
+	}
+	</style>
+</head>
+<body>
+	
+	<div id="left">
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+			<li>6</li>
+		</ul>
+	</div>
+	<div id="right">
+		
+	</div>
+	<!-- <div id="draggable">Drag me</div>
+	<div id="droppable">Drag me</div> -->
+ 	<script type="text/javascript">
+ 	//返回 对象
+ // 	$('#left li').draggable({ cursor: "move" });
+	// $( "#right" ).droppable({
+	//  	cursor: "crosshair",
+	//  	drop: function() {
+	//     	//完成
+	//   	},
+	//   	start:function(){
+	//   		//拖动开始的时候
+	//   	},
+	//   	stop :function(){
+	//   		//拖动结束的时候
+	//   	}
+
+	//   	//拖动到啥时候的
+	//  })
+
+	$("#left li").draggable({
+        cursor:"move",
+        cursorAt:{top:0,left:0},
+        helper:function(event){
+            return $("<div class='ui-widget-header'>我是一个自定义helper</div>");
+        }
+    });
+ 	</script>
+<script>
+//设置 拖拽
+$( "#draggable" ).draggable({ cursor: "move" });
+//设置被拖拽
+$( "#droppable" ).droppable({
+	// containment
+	// 	//可以限制draggable只能在指定的元素或区域的边界以内进行拖动
+	// cursor
+	cursor: "crosshair",
+	// //指定在做拖拽动作时，鼠标的CSS样式。\
+	// gridType: 
+	// 	//拖拽元素时，只能以指定大小的方格进行拖动。数组形式为[ x, y ]。 
+    drop: function() {
+    alert( "1" );
+  }
+
+})
+</script>
+</body>
+</html>

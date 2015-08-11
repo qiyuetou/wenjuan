@@ -1,0 +1,28 @@
+     <script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
+     <script type="text/javascript" src="./tool-js/jquery-2.1.4.min.js"></script>
+<div class="frm">
+  <form name="uploadFrom" id="uploadFrom" action="http://lc.demo.com/upload.php" method="post"  target="tarframe" enctype="multipart/form-data">
+   <input type="file" id="upload_file" name="upfile">
+  </form>
+  <iframe src=""  width="0" height="0" style="display:none;" name="tarframe"></iframe>
+  <div></div>
+ </div>
+ <div id="msg">
+ </div>
+ <script type="text/javascript">
+$(function(){
+ $("#upload_file").change(function(){
+   // $("#uploadFrom").submit();
+   $.ajax({
+   	url:"http://lc.demo.com/upload.php",
+   	data:,
+   	type:
+   })
+ });
+});
+
+// function stopSend(str){
+//  var im="<img src='"+str+"'>";
+//  $("#msg").append(im);
+// }
+ </script>
